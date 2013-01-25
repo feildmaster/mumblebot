@@ -265,7 +265,9 @@ class MumbleCommand(cmd.Cmd):
         return self.do_exit(line)
     def do_rename(self, line):
         ''' Renames the bot, setting the name upon the next connection '''
-        if line == '': return
+        if line == '':
+            self.log('Current nick: %s' % self.connection.nick)
+            return
         if self.connection.connected:
             self.log('You must reconnect to apply the name change')
         nick = line.split(' ')[0]
